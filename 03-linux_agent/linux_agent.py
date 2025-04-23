@@ -6,7 +6,8 @@ import os
 
 
 def run_linux_agent():
-    load_dotenv(dotenv_path="/home/guru/Desktop/Desktop/GuruPrasad/GuruDocs/ai_agent/ai_agent/03-linux_agent/cred.env")
+    # load_dotenv(dotenv_path="{get_current_directory()}+/cred.env")
+    load_dotenv(dotenv_path=get_current_directory() +"/" + "cred.env")
 
     llm = ChatOpenAI(
         model_name="mistralai/mixtral-8x7b-instruct",
