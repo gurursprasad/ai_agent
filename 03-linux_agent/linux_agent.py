@@ -6,7 +6,6 @@ import os
 
 
 def run_linux_agent():
-    # load_dotenv(dotenv_path="{get_current_directory()}+/cred.env")
     load_dotenv(dotenv_path=get_current_directory() +"/" + "cred.env")
 
     llm = ChatOpenAI(
