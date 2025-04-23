@@ -28,6 +28,11 @@ def run_linux_agent():
             break
         response = chain.invoke({"question": query})
         command = response.content.strip()
+        if not is_command_safe(command):
+            log_command_history(query, command, "The command is potentially unsafe and has been blocked.")
+            print("The command is potentially unsafe and has been blocked.")
+            continue
+            
         print(f"\nCommand to run: {command}")
         confirm = input("Run this command? (y/n): ")
         if confirm.lower() == "y":

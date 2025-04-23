@@ -4,6 +4,9 @@ import subprocess
 from urllib import response
 
 
+BLACKLISTED_KEYWORDS = ["rm", "shutdown", "reboot", "mkfs", ":(){", "dd", "chmod 777", "curl http", "wget http", "scp", "mv /", "kill -9 1"]
+
+
 def get_current_directory():
     """
     Get the current working directory.
@@ -23,22 +26,6 @@ def run_command(command: str) -> str:
         return result.stdout + result.stderr
     except Exception as e:
         return f"Error: {str(e)}"
-    
-
-# def run_command(command: str) -> str:
-#     try:
-#         result = subprocess.run(
-#             command,
-#             shell=True,
-#             executable="/bin/bash",
-#             stdout=subprocess.PIPE,
-#             stderr=subprocess.PIPE,
-#             text=True
-#         )
-#         return result.stdout + result.stderr
-#     except Exception as e:
-#         return f"Error: {str(e)}"
-
 
 
 def log_command_history(prompt: str, command: str, output: str, log_file="command_history.log"):
@@ -52,3 +39,10 @@ def log_command_history(prompt: str, command: str, output: str, log_file="comman
             f.write("-" * 60 + "\n")
     except Exception as e:
         print(f"Failed to log command history: {str(e)}")
+
+
+def is_command_safe(command):
+    for keyword in BLACKLISTED_KEYWORDS:
+        if keyword in command:
+            return False
+    return True
