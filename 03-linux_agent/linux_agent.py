@@ -16,7 +16,7 @@ def run_linux_agent():
     )
 
     prompt = ChatPromptTemplate.from_template("""
-    You are a Linux expert. Given a question, respond ONLY with the exact Linux command (no explanation).
+    You are a Linux expert. Given a question, respond ONLY with the exact Linux command. I repeat I do not want the command explanation. Dont add any extra information in the output except the command. 
     Question: {question}
     """)
 
